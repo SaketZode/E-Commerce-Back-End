@@ -21,7 +21,8 @@ from MainApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', views.getProducts)
+    path('products/', views.getProducts),
+    path('products/<int:productId>', views.getProduct),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -18,11 +18,23 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from MainApp import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', views.getProducts),
-    path('products/<int:productId>', views.getProduct),
+    path('user/profile/', views.getUserProfile, name='user_profile'),
+    path('products/', views.getProducts, name='product_list'),
+    path('products/<int:productId>', views.getProduct, name='product_details'),
+    path('user/login/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('user/register/', views.registerUser, name='register_user'),
+    path('user/profile/update/', views.updateUserProfile, name='update_user_profile'),
+    path('user/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('user/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('user/list/', views.getUsers, name='user_list')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -25,7 +25,7 @@ SECRET_KEY = 'v^lktuz4er2!=!&*bqq-0d!oks_^*r8+_-ur6a(+x70@da==96'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['74.86.5.247', '127.0.0.1']
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
@@ -89,6 +89,11 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

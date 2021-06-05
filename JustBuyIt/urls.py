@@ -34,7 +34,11 @@ urlpatterns = [
     path('user/profile/update/', views.updateUserProfile, name='update_user_profile'),
     path('user/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('user/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('user/list/', views.getUsers, name='user_list')
+    path('user/list/', views.getUsers, name='user_list'),
+    path('order/place/', views.createOrder, name='place-order'),
+    path('order/details/<int:pk>', views.getOrderById, name='order-details'),
+    path('order/<int:orderId>/pay/', views.updateOrderStatusToPaid, name='payment-status'),
+    path('order/history/', views.getOrderHistory, name='order-history'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

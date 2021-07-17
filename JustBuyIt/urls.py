@@ -27,18 +27,27 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/profile/', views.getUserProfile, name='user_profile'),
+    path('bestproducts/', views.getTopProducts, name='top-products'),
     path('products/', views.getProducts, name='product_list'),
+    path('product/create/', views.createProduct, name='create-product'),
     path('products/<int:productId>', views.getProduct, name='product_details'),
+    path('product/delete/<int:id>', views.deleteProduct, name='delete-product'),
+    path('product/update/<int:id>', views.updateProductDetails, name='update-product'),
+    path('product/image/upload/', views.uploadProductImage, name='upload-product-image'),
+    path('product/review/create/<int:product_id>', views.createProductReview, name='create-product-review'),
     path('user/login/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('user/register/', views.registerUser, name='register_user'),
     path('user/profile/update/', views.updateUserProfile, name='update_user_profile'),
     path('user/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('user/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('user/list/', views.getUsers, name='user_list'),
+    path('user/delete/<int:id>', views.deleteUser, name='delete_user'),
+    path('user/details/<int:id>', views.getUserById, name='user-details'),
+    path('user/update/<int:id>', views.updateUserDetails, name='update-user'),
     path('order/place/', views.createOrder, name='place-order'),
     path('order/details/<int:pk>', views.getOrderById, name='order-details'),
     path('order/<int:orderId>/pay/', views.updateOrderStatusToPaid, name='payment-status'),
     path('order/history/', views.getOrderHistory, name='order-history'),
-]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('orders/', views.getAllOrders, name='orders-list'),
+    path('order/deliver/<int:id>', views.updateOrderToDelivered, name='deliver-order'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
